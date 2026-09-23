@@ -369,20 +369,20 @@ Remember:
 """
 
         # Send the conversation to Gemini.
-        response = client.models.generate_content(
-            model="gemini-3.6-flash",
-            contents=user_prompt,
-          config=types.GenerateContentConfig(
-    system_instruction=SYSTEM_PROMPT,
-    temperature=0.2,
-    max_output_tokens=2000,
-    thinking_config=types.ThinkingConfig(
-        thinking_budget=500
-    )
+response = client.models.generate_content(
+    model="gemini-3.6-flash",
+    contents=user_prompt,
+    config=types.GenerateContentConfig(
+        system_instruction=SYSTEM_PROMPT,
+        temperature=0.2,
+        max_output_tokens=2000,
+        thinking_config=types.ThinkingConfig(
+            thinking_budget=500
         )
+    )
+)
 
-        ai_response = response.text
-
+ai_response = response.text
     except Exception as error:
 
         # During development, show the technical error so we can
