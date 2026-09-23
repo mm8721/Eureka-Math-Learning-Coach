@@ -1041,3 +1041,110 @@ When additional evidence is needed, the coach may ask the student to justify the
 **A diagnostic or precision-check question should not unintentionally disclose its answer.**
 
 The presence or absence of a coach question should not become a predictable signal that something is wrong or that a particular action is required.
+---
+
+## Regression Test — Decimal Addition After Iteration 5
+
+### Purpose
+
+Retest decimal place-value reasoning after the Iteration 5 system-prompt refactor.
+
+### Problem
+
+3.6 + 0.45 = 3.105
+
+### Support Level
+
+Keep trying
+
+### Behaviors Preserved or Improved
+
+**PASS — Diagnosed before assuming**
+
+The coach initially asked the student to explain how the problem was set up rather than assuming the cause of the incorrect answer.
+
+After the student explained:
+
+> "I added 6 + 45 and got 105, so I put 105 after the decimal."
+
+the coach investigated the place value of the digits rather than immediately telling the student to line up the decimal points.
+
+**PASS — Concept before procedure**
+
+The coach asked the student to identify that the 6 in `3.6` represents tenths and that the 4 in `0.45` also represents tenths.
+
+It then explicitly reasoned in terms of place-value units:
+
+> "In `3.6`, we have `6` tenths, and in `0.45`, we have `4` tenths."
+
+This is a meaningful improvement over treating "line up the decimal points" as the mathematical reason for decimal alignment.
+
+**PASS — Unit-based reasoning**
+
+The coach connected addition to like units:
+
+6 tenths + 4 tenths = 10 tenths
+
+This supports the broader instructional principle that students should reason about the units represented by numbers rather than rely only on procedural rules.
+
+### Issues Identified
+
+**PASS WITH NOTE — Regrouping question was too leading**
+
+After the student determined that 6 tenths + 4 tenths = 10 tenths, the coach asked:
+
+> "What does 10 tenths make as a whole number?"
+
+The question points the student toward the expected conclusion rather than fully eliciting their understanding of regrouping.
+
+A stronger diagnostic question would be:
+
+> "How would you regroup 10 tenths?"
+
+This requires the student to demonstrate the relationship between place-value units rather than having the type of resulting unit supplied in the question.
+
+**NEEDS REVISION — Shifted from conceptual reasoning back toward procedure**
+
+After establishing that 10 tenths can be regrouped as 1 one, the coach asked:
+
+> "How do you think we should line up the numbers `3.6` and `0.45` to add them correctly?"
+
+This shifts attention away from the place-value-unit reasoning the coach had successfully established.
+
+The relevant mathematical idea is that corresponding place-value units should align:
+
+- ones with ones
+- tenths with tenths
+- hundredths with hundredths
+
+Decimal points align as a consequence of correct place-value alignment rather than being the underlying mathematical reason.
+
+A stronger question might be:
+
+> "How would you line up the place-value units in `3.6` and `0.45`?"
+
+### Broader Design Insight
+
+The coach is increasingly successful at reasoning conceptually, but it can still lead the student through a predetermined sequence of questions toward a procedure.
+
+The next question should be selected based on the mathematical evidence still needed, not simply the next procedural action.
+
+### Emerging General Principle
+
+**Do not embed the mathematical conclusion in the question.**
+
+A diagnostic or conceptual question should provide enough structure to focus the student's thinking without supplying the relationship the student is supposed to demonstrate.
+
+For example:
+
+Prefer:
+
+> "How would you regroup 10 tenths?"
+
+over:
+
+> "What does 10 tenths make as a whole number?"
+
+The first gathers evidence of the student's understanding. The second partially supplies the conclusion.
+
+This connects to the earlier simplest-form finding: the wording or presence of a coach question should not unintentionally reveal the expected answer.
