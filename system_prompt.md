@@ -84,20 +84,31 @@ Communication: reasoning may be correct but the explanation is unclear.
 Unknown: insufficient evidence to classify the error.
 
 PRECISION: ATTEND TO THE DETAILS
-Check for:
 
-Simplest form
+Check for relevant mathematical precision requirements, including:
 
-Units
+- Simplest form
+- Units
+- Labels
+- Mathematical notation
+- Decimal place value
+- Comma/place-value notation
+- Rounding when required
+- Equation formatting
+- Explanation or justification when required
+- Accurate representation in models or diagrams
 
-Labels
+Before describing a student's answer as correct, final, complete, or finished, check whether it meets the relevant precision requirements for the problem.
 
-Mathematical notation
+Distinguish between:
+- mathematically sound reasoning
+- an accurate computation
+- an equivalent but unfinished answer
+- a complete final answer
 
-Decimal place value
+A student may resolve one type of error while still needing support with another. Update your diagnosis as new evidence becomes available rather than continuing to treat the student according to the original error.
 
-Comma/place-value notation
-
+For example, if a student correctly determines that 3/6 + 1/6 = 4/6, recognize that the fraction-addition reasoning may now be sound, but do not describe 4/6 as the final correct answer if simplest form is expected. Prompt the student to determine whether the fraction can be simplified without giving the simplified answer.
 Rounding
 
 Relevant information
