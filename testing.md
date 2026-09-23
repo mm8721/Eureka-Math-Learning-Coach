@@ -1148,3 +1148,110 @@ over:
 The first gathers evidence of the student's understanding. The second partially supplies the conclusion.
 
 This connects to the earlier simplest-form finding: the wording or presence of a coach question should not unintentionally reveal the expected answer.
+---
+
+## Regression Test — Multi-Digit Subtraction After Iteration 5
+
+### Purpose
+
+Retest multi-digit subtraction after the Iteration 5 system-prompt refactor, with particular attention to whether the coach preserves a mathematically valid student-generated regrouping strategy.
+
+### Problem
+
+402 − 187 = 385
+
+### Support Level
+
+Keep trying
+
+### Behaviors Preserved or Improved
+
+**PASS — Diagnosed before assuming**
+
+The coach first asked the student to explain how they solved the problem rather than assuming the source of the incorrect answer.
+
+After the student explained:
+
+> "I did 7 − 2 = 5, 8 − 0 = 8, and 4 − 1 = 3."
+
+the coach focused on the student's reasoning in the ones place rather than immediately supplying a regrouping procedure.
+
+**PASS — Reasoned with place-value units**
+
+The coach identified the relevant quantities as `2 ones` and `7 ones` rather than treating the digits as numbers without units.
+
+This supports the emerging importance of reasoning explicitly with mathematical units.
+
+**PASS WITH NOTE — Regrouping prompt**
+
+After the student recognized that there were not enough ones to subtract 7 ones, the coach asked:
+
+> "Since you don't have enough ones, what could you do to get more ones so that you can subtract 7?"
+
+The question preserved productive struggle and did not prescribe a particular regrouping pathway.
+
+However, "get more ones" is less mathematically precise than describing the action as regrouping the existing quantity.
+
+A stronger question would be:
+
+> "How could you regroup 402 so that you are able to subtract 7 ones?"
+
+This emphasizes that the value of 402 does not change. The quantity is represented using different place-value units.
+
+### Alternative Student Strategy Test
+
+The student responded:
+
+> "I could think of 402 as 40 tens and 2 ones."
+
+This intentionally tested whether the coach would accept a valid representation that differed from the pathway it followed during the original test.
+
+The coach responded:
+
+> "You are right that 40 tens and 2 ones equals 402. If you take one of those tens and trade it for ones, how many tens and ones would you have then?"
+
+**STRONG PASS — Preserved a valid student strategy**
+
+The coach correctly recognized:
+
+402 = 40 tens + 2 ones
+
+and continued reasoning within the student's representation.
+
+It did not redirect the student toward a prescribed sequence such as first representing 402 as 4 hundreds, 0 tens, and 2 ones and then decomposing a hundred.
+
+This provides evidence that the Iteration 5 "Preserve Valid Student Strategies" principle is influencing coach behavior.
+
+### Vocabulary Refinement
+
+The structure of the coach's response was strong. The preferred wording would replace "trade" with "regroup":
+
+> "You are right that 40 tens and 2 ones equals 402. If you regroup one of those tens as ones, how many tens and ones would you have then?"
+
+For place-value equivalence, prefer mathematically precise language such as "regroup" rather than relying primarily on terms such as:
+
+- borrow
+- carry
+- trade
+- move
+- get more
+
+The purpose is not simply to substitute vocabulary. The language should communicate that the quantity remains equivalent while its place-value units are represented differently.
+
+### Design Insight
+
+Concept before procedure should not mean requiring one prescribed conceptual representation.
+
+The coach should:
+
+- recognize mathematically valid alternative representations
+- follow the student's strategy when it supports the learning objective
+- reason explicitly with place-value units
+- use precise language to describe equivalent representations
+- intervene when the student's strategy is mathematically invalid rather than merely unconventional
+
+### Iteration 5 Result
+
+The explicit instruction to preserve valid student strategies appears to have generalized successfully to this test.
+
+The remaining issues are primarily about question design and mathematical language rather than the coach's willingness to follow student reasoning.
