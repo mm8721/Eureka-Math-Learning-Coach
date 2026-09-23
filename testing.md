@@ -843,3 +843,115 @@ The coach should:
 For decimal operations specifically, place-value alignment should be treated as the underlying mathematical principle. Decimal-point alignment is a consequence of that structure, not the conceptual reason for the procedure.
 
 The iteration should preserve the successful behaviors already demonstrated in Tests 001 and 002.
+---
+
+## Test Case 003 — Multi-Digit Subtraction and Regrouping
+
+### Purpose
+Test whether the Concept Before Procedure principle generalizes to multi-digit subtraction and regrouping without explicitly teaching the coach how to handle this specific problem.
+
+### Problem
+402 − 187 = 385
+
+### Support Level
+Keep trying
+
+### Student Reasoning and Coach Behavior
+
+The student initially gave the incorrect answer:
+
+402 − 187 = 385
+
+The coach asked the student to explain how they got the answer rather than immediately assuming the source of the error.
+
+The student explained:
+
+> "I did 7 − 2 = 5, 8 − 0 = 8, and 4 − 1 = 3."
+
+The coach recognized the student's approach and focused attention on the ones place rather than immediately providing the regrouping procedure.
+
+When the student suggested:
+
+> "Borrow from the tens place."
+
+the coach noticed that the tens digit in 402 is 0 and asked the student to consider where they could look next.
+
+The student identified the hundreds place. The coach then guided the student toward considering the relationship between the hundreds and tens places.
+
+### What Worked
+
+**PASS — Diagnosed before assuming**
+
+The coach did not infer the misconception from the incorrect answer alone. It first asked the student to explain their reasoning.
+
+**PASS — Responded to evidence**
+
+Once the student revealed that they were subtracting the smaller digit from the larger digit in each place, the coach adjusted its questioning based on that evidence.
+
+**PASS — Preserved productive struggle**
+
+The coach did not immediately provide the standard regrouping algorithm. It continued asking questions that allowed the student to determine what to do next.
+
+**PASS WITH NOTE — Concept before procedure generalized**
+
+The coach moved toward place-value reasoning instead of immediately giving procedural steps. This suggests that the Concept Before Procedure instruction generalized beyond the decimal example used when the rule was developed.
+
+However, the coach continued to use procedural language such as "borrow" and "move" rather than consistently describing regrouping through equivalent place-value units.
+
+### Language to Improve
+
+The coach used phrases such as:
+
+> "borrow from the tens place"
+
+and
+
+> "move that 1 hundred over to the tens place"
+
+These phrases can support a familiar procedure, but they do not precisely describe the mathematics occurring during regrouping.
+
+The underlying mathematical idea is that a quantity can be represented using different but equivalent combinations of place-value units.
+
+### Important Instructional Design Insight — Preserve Valid Student Strategies
+
+Concept before procedure should not mean that the AI imposes one preferred conceptual strategy.
+
+Students may use different mathematically valid place-value representations when regrouping.
+
+For example, a student might think about 402 as:
+
+- 4 hundreds, 0 tens, and 2 ones
+- 40 tens and 2 ones
+- 3 hundreds, 10 tens, and 2 ones
+- 39 tens and 12 ones
+
+The coach should recognize and work with a mathematically valid student strategy when possible rather than redirecting the student toward one prescribed decomposition pathway.
+
+The goal is not to require a particular representation. The goal is to determine whether the student understands the place-value relationships that make their regrouping strategy valid.
+
+### Design Principle Identified
+
+**Concept before procedure does not mean the AI's concept before the student's strategy.**
+
+The coach should:
+
+- seek evidence of the student's reasoning
+- preserve mathematically valid strategies
+- connect procedures to underlying mathematical structure
+- use precise place-value language
+- avoid unnecessarily replacing a student's valid strategy with the coach's preferred method
+
+### Iteration 5 Consideration
+
+Do not immediately add another isolated rule to the system prompt.
+
+First review the complete system prompt to determine whether the growing set of instructional principles should be reorganized or consolidated.
+
+Potential areas to examine include:
+
+- conceptual understanding versus procedural knowledge
+- mathematical language and precision
+- preservation of student strategy
+- diagnostic questioning
+- stopping criteria
+- overlap between existing instructions
