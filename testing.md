@@ -553,3 +553,293 @@ Based on Regression Test 001, the next system iteration should address:
    - Continue using evidence from student thinking.
    - Continue preserving productive struggle.
    - Continue distinguishing conceptual progress from mathematical completion.
+---
+
+# Test Case 002: Decimal Addition and Place Value
+
+## Purpose
+
+Test whether the coach's diagnostic behaviors generalize beyond fractions to a different mathematical domain.
+
+This test examines whether the coach can:
+
+1. diagnose an incorrect decimal-addition response before assuming the cause
+2. distinguish observed student thinking from inference
+3. update its diagnosis when the student provides new evidence
+4. connect decimal addition to place-value understanding
+5. prioritize mathematical concepts over memorized procedural rules
+
+---
+
+## Initial Problem
+
+### Student
+
+`3.6 + 0.45 = 3.105`
+
+**Selected support level:**
+
+Keep trying
+
+### Coach
+
+> Can you walk me through how you set up this addition problem and got `3.105`?
+
+### Evaluation
+
+**PASS**
+
+The coach did not assume why the student produced the incorrect answer.
+
+Possible causes could have included:
+
+- misunderstanding decimal place value
+- treating decimal digits as whole numbers
+- incorrect alignment
+- a calculation error
+- another strategy not yet visible from the student's answer
+
+Instead of selecting a misconception without evidence, the coach asked the student to explain their reasoning.
+
+This suggests that the "diagnose before assuming" behavior from Test Case 001 generalized to a new mathematical context.
+
+---
+
+## Diagnostic Sequence
+
+### Student
+
+> I added 6 + 45 and got 105, so I put 105 after the decimal.
+
+### Coach
+
+> When you lined up 3.6 and 0.45 to add them, how did you line up the decimal points?
+
+### Evaluation
+
+**PASS WITH NOTE**
+
+The coach appropriately continued investigating the student's strategy rather than immediately correcting the answer.
+
+However, it introduced an unsupported assumption by asking:
+
+> "When you lined up..."
+
+The student had not stated that they lined up the numbers.
+
+The student's actual explanation was that they added `6 + 45` and placed `105` after the decimal.
+
+This conflicts with the design principle that the coach should distinguish:
+
+- what the student actually said or did
+- what the evidence suggests
+- what remains unknown
+
+A stronger question would avoid inserting an unobserved step into the student's reasoning.
+
+---
+
+### Student
+
+> I didn't line them up. I just added 6 + 45.
+
+### Coach
+
+> When you look at 3.6 and 0.45, what place value is the 6 in, and what place value is the 4 in?
+
+### Evaluation
+
+**PASS**
+
+The coach successfully updated its approach after the student corrected its assumption.
+
+Rather than continuing to focus immediately on decimal alignment, it investigated the student's understanding of place value.
+
+This is evidence that the coach can revise its diagnostic path when new student information contradicts an earlier inference.
+
+---
+
+### Student
+
+> The 6 is in the tenths place and the 4 is in the tenths place.
+
+### Coach
+
+> You noticed that both the 6 and the 4 are in the tenths place.
+>
+> Since they are in the same place value, what does that tell us about how 3.6 and 0.45 should be lined up before you add them?
+
+### Evaluation
+
+**PASS WITH NOTE**
+
+The coach accurately acknowledged an understanding the student had demonstrated: both digits represent tenths.
+
+It then attempted to connect that understanding to the setup of the addition problem.
+
+However, the response began shifting toward decimal alignment as the procedural focus.
+
+The desired mathematical principle is not simply that decimal points should align.
+
+The underlying principle is that quantities with corresponding place values should be aligned:
+
+- ones with ones
+- tenths with tenths
+- hundredths with hundredths
+
+Correct alignment of the decimal points is a consequence of aligning corresponding place values.
+
+---
+
+### Student
+
+> The decimal points should line up.
+
+### Coach
+
+> Now that we know the decimal points need to line up, how would you set up `3.6 + 0.45` to add them?
+
+### Evaluation
+
+**NEEDS REVISION**
+
+The coach accepted "line up the decimal points" as the primary mathematical rule.
+
+While this procedure can produce the correct setup, it does not capture the underlying place-value reasoning the learning coach is intended to emphasize.
+
+The coach should help the student understand that decimal addition requires quantities representing the same place value to be combined.
+
+A stronger instructional approach would emphasize aligning ones with ones, tenths with tenths, and hundredths with hundredths.
+
+The decimal points then align because the place values are correctly aligned.
+
+---
+
+### Student
+
+> I would put the decimal points on top of each other.
+
+### Coach
+
+> How would `3.6` and `0.45` look if you stacked them with their decimal points lined up?
+
+### Evaluation
+
+**NEEDS REVISION**
+
+The coach again reinforced decimal-point alignment as the central procedure.
+
+Because this framing occurred across multiple responses, it appears to be a pattern rather than an isolated wording choice.
+
+The coach continued preserving productive struggle by asking the student to construct the setup independently, but the conceptual focus was not aligned with the intended instructional approach.
+
+The test was stopped at this point because sufficient evidence had been collected to identify the instructional-design issue.
+
+---
+
+## Test Case 002 Findings
+
+### Successful Behavior: Diagnose Before Assuming
+
+The coach initially requested evidence about the student's strategy rather than assuming the source of the incorrect answer.
+
+**Status: PASS**
+
+---
+
+### Successful Behavior: Updating the Diagnostic Path
+
+When the student explained that they had not lined up the numbers, the coach moved away from its earlier assumption and investigated place-value understanding.
+
+**Status: PASS**
+
+---
+
+### Issue: Unsupported Assumptions About Student Process
+
+The coach briefly described a step the student had not reported taking:
+
+> "When you lined up..."
+
+Future testing should continue examining whether the coach consistently separates observed evidence from inference.
+
+**Status: MONITOR**
+
+---
+
+### Issue: Procedure Replaced the Underlying Concept
+
+The coach repeatedly emphasized:
+
+> "line up the decimal points"
+
+rather than treating place-value alignment as the mathematical principle underlying decimal addition.
+
+This creates a risk that the coach teaches a memorized procedure without sufficiently connecting it to the mathematical structure that explains why the procedure works.
+
+**Status: NEEDS REVISION**
+
+---
+
+## Instructional Design Principle Identified
+
+When teaching or reinforcing a mathematical procedure, prioritize the mathematical concept that explains why the procedure works.
+
+Do not substitute a procedural shortcut or memorized rule for conceptual understanding.
+
+### Decimal Example
+
+For decimal operations, emphasize aligning corresponding place values:
+
+- ones with ones
+- tenths with tenths
+- hundredths with hundredths
+
+Decimal points align as a consequence of correct place-value alignment.
+
+"Line up the decimal points" should not be presented as the underlying mathematical reason for the procedure.
+
+---
+
+## Design Insight From Test Case 002
+
+A student may know a procedural rule without understanding the mathematical structure behind it.
+
+The learning coach should therefore distinguish between:
+
+**Knowing what to do**
+
+and
+
+**Understanding why the procedure works**
+
+When the learning objective requires conceptual understanding, the coach should use student reasoning to connect procedures to the mathematical concepts that justify them.
+
+This principle should generalize beyond decimal addition to other mathematical procedures.
+
+Examples may include:
+
+- regrouping in multi-digit computation
+- fraction algorithms
+- multiplication and division algorithms
+- equivalent fractions
+- operations with decimals
+- measurement conversions
+
+---
+
+## Iteration 4 Priority
+
+Based on Test Case 002, the next system-prompt iteration should strengthen the relationship between conceptual understanding and mathematical procedures.
+
+The coach should:
+
+1. identify the mathematical concept underlying a procedure
+2. prioritize that concept when diagnosing or teaching
+3. avoid presenting memorized rules as explanations
+4. connect procedures explicitly to the mathematical structure that makes them valid
+5. continue preserving productive struggle rather than simply explaining the procedure
+
+For decimal operations specifically, place-value alignment should be treated as the underlying mathematical principle. Decimal-point alignment is a consequence of that structure, not the conceptual reason for the procedure.
+
+The iteration should preserve the successful behaviors already demonstrated in Tests 001 and 002.
