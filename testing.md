@@ -955,3 +955,89 @@ Potential areas to examine include:
 - diagnostic questioning
 - stopping criteria
 - overlap between existing instructions
+
+### Regression Test After Iteration 5
+
+The fraction-addition test was repeated after refactoring the system prompt into a coaching decision framework.
+
+#### Behaviors Preserved or Improved
+
+**PASS — Diagnose before assuming**
+
+For `3/6 + 1/6 = 4/12`, the coach identified that the student added the numerators and asked how the student determined the denominator rather than assuming the source of the error.
+
+**PASS — Concept before procedure**
+
+After the student explained that they multiplied `6 × 2` because there were two fractions, the coach asked about the meaning of the denominator rather than stating a rule such as "keep the denominator the same."
+
+**PASS — Vocabulary scaffolding**
+
+The coach used mathematical vocabulary with accessible parenthetical support, such as:
+
+> "denominators (the bottom numbers)"
+
+This is a desirable behavior to preserve. Mathematical vocabulary should not be replaced by informal vocabulary when brief scaffolding can make the formal term accessible.
+
+**PASS — Previous completion fix preserved**
+
+When the student reached `4/6`, the coach did not immediately describe the answer as final or complete.
+
+#### Issues Identified
+
+**NEEDS REVISION — Unnecessary reflection and cognitive load**
+
+After the student reached `4/6`, the coach asked:
+
+> "How does that compare to your very first answer of `4/12`?"
+
+The student had already corrected the original denominator reasoning. Returning attention to the abandoned answer did not advance the current learning need and created unnecessary cognitive work.
+
+Reflection should serve a clear instructional purpose rather than occur simply because another mathematical question can be asked.
+
+**NEEDS REVISION — Over-questioning demonstrated understanding**
+
+After the student identified that the denominator changed from 12 to 6, the coach asked another question about why the denominator remains 6.
+
+At this point, sufficient evidence was developing that the original misconception had been resolved. The remaining relevant precision issue was determining whether `4/6` was in simplest form.
+
+Every question should earn its place by doing at least one of the following:
+
+- gathering missing diagnostic evidence
+- advancing the student toward the learning objective
+- resolving an actual mathematical or precision issue
+- providing support the student currently needs
+
+If a question does none of these, the coach should not ask it.
+
+**NEEDS REFINEMENT — Fractional-unit reasoning**
+
+The coach frequently described fractions using "pieces." More precise reasoning would identify the denominator as defining the fractional unit.
+
+For example:
+
+`3/6` represents 3 sixths.
+
+`1/6` represents 1 sixth.
+
+Therefore, 3 sixths + 1 sixth = 4 sixths.
+
+The coach should help students understand fraction operations through fractional units rather than relying primarily on procedural rules about numerators and denominators.
+
+#### Precision Check Design Insight
+
+When simplest form is relevant, the coach should ask the student to determine whether a fraction is in simplest form regardless of whether further simplification is possible.
+
+For example:
+
+- `4/6` → student determines that it can be simplified.
+- `5/6` → student determines that it cannot be simplified and can justify that 5 and 6 have no common factor greater than 1.
+
+The coach should not ask about simplification only when simplification is possible. Otherwise, the question itself becomes a hint.
+
+When additional evidence is needed, the coach may ask the student to justify the determination using common factors.
+
+#### Broader Design Principle
+
+**A diagnostic or precision-check question should not unintentionally disclose its answer.**
+
+The presence or absence of a coach question should not become a predictable signal that something is wrong or that a particular action is required.
