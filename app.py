@@ -1,11 +1,11 @@
-import os
 import streamlit as st
 from google import genai
 from google.genai import types
 
-# ---------------------------------------------------------
+
+# =========================================================
 # PAGE SETUP
-# ---------------------------------------------------------
+# =========================================================
 
 st.set_page_config(
     page_title="Eureka Math Learning Coach",
@@ -20,15 +20,16 @@ st.write(
     """
     This AI learning coach is designed to respond to **student thinking**,
     not just student answers.
-    
+
     Show the coach what you're working on and explain what you're thinking.
     """
 )
 
-# ---------------------------------------------------------
+
+# =========================================================
 # SYSTEM PROMPT
-# This tells the AI HOW we want it to teach.
-# ---------------------------------------------------------
+# This is the instructional "brain" of the learning coach.
+# =========================================================
 
 SYSTEM_PROMPT = """
 You are an AI fifth-grade mathematics learning coach.
@@ -38,8 +39,8 @@ not simply produce answers.
 
 CORE PRINCIPLE: DO NOT RESCUE THE STUDENT.
 
-Before helping, try to determine what the student understands and where
-their reasoning may have broken down.
+Before helping, determine what the student understands and where their
+reasoning may have broken down.
 
 Preserve productive struggle when appropriate.
 
@@ -95,6 +96,10 @@ Do not infer mastery from one correct answer.
 
 Do not diagnose a misconception without evidence.
 
+If a student's answer is incorrect but the student has not explained
+their reasoning, ask a diagnostic question before deciding what caused
+the error.
+
 STRATEGY IDENTIFICATION
 
 When possible, identify the strategy the student is using:
@@ -114,7 +119,7 @@ where the reasoning succeeds or breaks down.
 
 ERROR TYPES
 
-When there is enough evidence, errors may be classified as:
+When there is enough evidence, classify errors as:
 
 Conceptual:
 The underlying mathematical idea is not understood.
@@ -158,7 +163,17 @@ FOCUS ON THINKING
 
 Prioritize the student's reasoning over whether the final answer is correct.
 
-Praise productive mathematical behaviors such as:
+Praise only mathematical behaviors that are actually supported by evidence
+in the student's work.
+
+Do not use generic praise such as:
+- "Great job!"
+- "You're working hard!"
+- "Nice work!"
+
+unless there is evidence that specifically supports the statement.
+
+Productive mathematical behaviors may include:
 
 - checking
 - revising
@@ -166,8 +181,6 @@ Praise productive mathematical behaviors such as:
 - representing
 - noticing structure
 - persevering
-
-Do not praise merely because an answer is correct.
 
 SHOW ME THE EVIDENCE
 
@@ -236,6 +249,7 @@ Additional evidence needed:
 Recommended next move:
 
 Do NOT automatically show this full diagnostic to the student.
+
 Use it to guide instruction unless the user is operating in teacher mode.
 
 TEACHER OVERRIDE
@@ -248,16 +262,19 @@ accept the correction and update the current understanding.
 RESPONSE STYLE
 
 Be:
-
 - encouraging
 - respectful
 - precise
 - curious
 - age-appropriate
 
+Keep student-facing responses concise.
+
 Ask ONE useful question at a time when diagnosing student thinking.
 
-Avoid overwhelming the student.
+Do not overwhelm the student with multiple questions.
+
+Do not reveal an internal diagnostic report to the student.
 
 Do not rescue the student simply because an answer is incorrect.
 
@@ -266,18 +283,17 @@ student needs explicit teaching.
 """
 
 
-# ---------------------------------------------------------
-# SESSION MEMORY
-# This keeps the conversation on screen.
-# ---------------------------------------------------------
+# =========================================================
+# CONVERSATION MEMORY
+# =========================================================
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 
-# ---------------------------------------------------------
-# STUDENT CONTROL
-# ---------------------------------------------------------
+# =========================================================
+# STUDENT SUPPORT CONTROL
+# =========================================================
 
 support_level = st.radio(
     "How much support would you like?",
@@ -290,32 +306,39 @@ support_level = st.radio(
 )
 
 
-# ---------------------------------------------------------
-# DISPLAY PREVIOUS MESSAGES
-# ---------------------------------------------------------
+# =========================================================
+# RESET BUTTON
+# =========================================================
+
+if st.button("Start a new problem"):
+    st.session_state.messages = []
+    st.rerun()
+
+
+# =========================================================
+# DISPLAY CONVERSATION
+# =========================================================
 
 for message in st.session_state.messages:
-
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
 
-# ---------------------------------------------------------
+# =========================================================
 # STUDENT INPUT
-# ---------------------------------------------------------
+# =========================================================
 
 student_input = st.chat_input(
     "Show me your work and tell me what you're thinking..."
 )
 
 
-# ---------------------------------------------------------
+# =========================================================
 # AI RESPONSE
-# ---------------------------------------------------------
+# =========================================================
 
 if student_input:
 
-    # Save and display the student's message
     st.session_state.messages.append(
         {
             "role": "user",
@@ -328,14 +351,10 @@ if student_input:
 
     try:
 
-        # Connect securely to Gemini using the API key
-        # stored in Streamlit Secrets.
         client = genai.Client(
             api_key=st.secrets["GEMINI_API_KEY"]
         )
 
-        # Build conversation history so the coach can remember
-        # what the student has already said.
         conversation_history = ""
 
         for message in st.session_state.messages:
@@ -349,7 +368,6 @@ if student_input:
                 f"{speaker}: {message['content']}\n\n"
             )
 
-        # Add the student's selected help level.
         user_prompt = f"""
 The student selected this support level:
 
@@ -361,38 +379,45 @@ Here is the conversation so far:
 
 Respond to the student's most recent message.
 
-Remember:
+Follow these requirements:
 - First understand the student's thinking.
 - Respect the selected support level.
 - Do not simply provide the answer.
-- Ask one useful question at a time when diagnosing thinking.
+- If there is not enough evidence to identify the student's strategy
+  or misconception, ask a diagnostic question.
+- Ask only ONE question at a time.
+- Do not invent praise that is not supported by the student's work.
+- Keep the response concise and appropriate for a fifth-grade student.
 """
 
-        # Send the conversation to Gemini.
-response = client.models.generate_content(
-    model="gemini-3.6-flash",
-    contents=user_prompt,
-    config=types.GenerateContentConfig(
-        system_instruction=SYSTEM_PROMPT,
-        temperature=0.2,
-        max_output_tokens=2000,
-        thinking_config=types.ThinkingConfig(
-            thinking_budget=500
+        response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=user_prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=SYSTEM_PROMPT,
+                temperature=0.2,
+                max_output_tokens=1000,
+                thinking_config=types.ThinkingConfig(
+                    thinking_level="low"
+                )
+            )
         )
-    )
-)
 
-ai_response = response.text
+        ai_response = response.text
+
+        if not ai_response:
+            ai_response = (
+                "I wasn't able to generate a response. "
+                "Please try your message again."
+            )
+
     except Exception as error:
 
-        # During development, show the technical error so we can
-        # troubleshoot the connection.
         ai_response = (
             "I couldn't connect to the AI model.\n\n"
             f"Technical error: {error}"
         )
 
-    # Save and display the coach's response.
     st.session_state.messages.append(
         {
             "role": "assistant",
@@ -404,16 +429,16 @@ ai_response = response.text
         st.markdown(ai_response)
 
 
-# ---------------------------------------------------------
+# =========================================================
 # PROJECT NOTE
-# ---------------------------------------------------------
+# =========================================================
 
 st.divider()
 
 st.caption(
     """
-    Prototype: This learning coach is being designed to investigate how AI
-    can support mathematical reasoning, diagnostic questioning, productive
-    struggle, and student agency.
+    Prototype: This learning coach is being designed to explore how AI
+    can support mathematical reasoning, diagnostic questioning,
+    productive struggle, mathematical precision, and student agency.
     """
 )
