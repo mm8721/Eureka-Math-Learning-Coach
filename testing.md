@@ -270,3 +270,286 @@ A successful AI learning coach should not simply determine whether an answer is 
 It should use evidence from student thinking to determine:
 
 **What does the student understand now, what remains unresolved, and what is the least amount of support needed for the student to take the next mathematical step independently?**
+---
+
+# Regression Test 001: Adding Fractions With Like Denominators
+
+## Purpose
+
+Repeat Test Case 001 after strengthening the mathematical completion criteria in the system prompt.
+
+The goals of this regression test were to determine whether:
+
+1. the coach would preserve the successful diagnostic behavior from the original test
+2. the coach would no longer describe `4/6` as a complete correct answer before checking simplest form
+3. the prompt revision introduced any new instructional issues
+
+---
+
+## Regression Test Sequence
+
+### Student
+
+`3/6 + 1/6 = 4/12`
+
+### Coach
+
+> I see you added 3 and 1 to get 4. Can you tell me how you decided on 12 for the denominator?
+
+### Evaluation
+
+**PASS**
+
+The coach preserved the diagnostic behavior from the original test.
+
+It:
+
+- identified observable evidence from the student's work
+- used the mathematically precise term "denominator"
+- did not assume why the student produced `12`
+- did not provide the correct answer
+- asked one diagnostic question
+
+The revised completion criteria did not cause the coach to jump ahead to simplifying the fraction before addressing the student's immediate reasoning.
+
+---
+
+### Student
+
+> I multiplied 6 x 2 because there are two fractions.
+
+### Coach
+
+> Ah, I see—you multiplied by 2 because there are two fractions in the problem.
+>
+> When we add `3/6` and `1/6`, what do the sixths tell us about the size of the pieces we are putting together?
+
+### Evaluation
+
+**PASS**
+
+The coach used the student's explanation as evidence and shifted from the procedure to the meaning of the fractional units.
+
+The conversational phrase "Ah, I see" is unnecessary but does not interfere with the instructional purpose.
+
+---
+
+### Student
+
+> It tells us there are 6 pieces.
+
+### Coach
+
+> You mentioned there are 6 pieces. If you have `3/6` of something and add `1/6` more of the exact same size, do the pieces change in size when you put them together?
+
+### Evaluation
+
+**PASS WITH NOTE**
+
+The coach continued focusing on the meaning of the denominator and did not provide the computational answer.
+
+However, the phrase "of the exact same size" supplied part of the conceptual understanding that the student could have been asked to generate independently.
+
+Because the selected support level was "Keep trying," this may represent slightly more support than necessary.
+
+No prompt change was made based on this single instance. Future tests should determine whether this becomes a pattern.
+
+---
+
+### Student
+
+> No, they stay the same size.
+
+### Coach
+
+> You're right, the size of the pieces stays the same.
+>
+> If the pieces stay as sixths, what should the denominator of your answer be?
+
+### Evaluation
+
+**PASS**
+
+The coach connected the conceptual understanding of sixths as equal-sized fractional units to the symbolic role of the denominator.
+
+It returned responsibility for determining the denominator to the student.
+
+---
+
+### Student
+
+> 6
+
+### Coach
+
+> The denominator is 6.
+>
+> Now, putting the numerator and denominator together, what is your complete answer for `3/6 + 1/6`?
+
+### Student
+
+> 4/6
+
+### Coach
+
+> You found that the sum is `4/6` by keeping the denominator the same and adding the numerators.
+>
+> Can `4/6` be written in an even simpler form using a smaller denominator?
+
+### Evaluation
+
+**PASS — ORIGINAL FAILURE FIXED**
+
+The system-prompt revision successfully changed the coach's behavior.
+
+During the original test, the coach described `4/6` as "the correct answer" without checking simplest form.
+
+During the regression test, the coach recognized the student's successful fraction-addition reasoning while continuing to check whether the answer met the simplest-form requirement.
+
+This demonstrates that the revised completion criteria affected the intended behavior without disrupting the earlier diagnostic sequence.
+
+### New Language Issue Identified
+
+The phrase:
+
+> "using a smaller denominator"
+
+is not the preferred mathematical description of simplifying a fraction.
+
+A numerically smaller denominator represents larger fractional units, so framing simplification primarily as finding a "smaller denominator" could create or reinforce an imprecise mathematical association.
+
+Preferred language should focus on concepts such as:
+
+- equivalent fractions
+- simplest form
+- common factors
+- dividing the numerator and denominator by the same factor
+
+Future iterations should favor precise mathematical vocabulary rather than using denominator size as the definition of simplification.
+
+---
+
+### Student
+
+> 2/3
+
+### Coach
+
+> You wrote `2/3`. How did you decide that `4/6` simplifies to `2/3`?
+
+### Evaluation
+
+**PASS**
+
+The coach did not assume that producing the expected answer demonstrated understanding.
+
+It requested evidence of the student's equivalent-fraction reasoning.
+
+---
+
+### Student
+
+> I divided the top and bottom by 2.
+
+### Coach
+
+> You divided both the numerator and the denominator by 2.
+>
+> When you divide both numbers by the same amount, why does the value of the fraction stay the same?
+
+### Evaluation
+
+**NEEDS REVISION — STOPPING CRITERIA**
+
+The coach's question is mathematically meaningful, but the student had already demonstrated substantial evidence related to the original task:
+
+- recognized the denominator should remain `6`
+- connected the denominator to the size of the fractional units
+- correctly added the fractions to produce `4/6`
+- recognized that `4/6` could be simplified
+- produced `2/3`
+- explained that the numerator and denominator were both divided by `2`
+
+At this point, the coach continued probing into the conceptual theory of equivalent fractions.
+
+Whether this additional question is appropriate should depend on the learning objective.
+
+If the learning objective is to add fractions with like denominators and express the result in simplest form, the student may already have demonstrated sufficient understanding.
+
+If the learning objective is to explain why dividing the numerator and denominator by the same factor produces an equivalent fraction, the additional question would be appropriate.
+
+This reveals a need for stronger learning-objective alignment and stopping criteria.
+
+---
+
+## Regression Test 001 Findings
+
+### Fix Verified: Mathematical Completion Criteria
+
+The system-prompt revision successfully prevented the coach from prematurely declaring `4/6` the completed answer.
+
+**Status: FIX VERIFIED**
+
+---
+
+### New Issue: Mathematical Language
+
+The coach used "smaller denominator" when prompting the student to simplify `4/6`.
+
+This is understandable language but is not mathematically precise enough for the intended design of the learning coach.
+
+**Status: MONITOR AND IMPROVE**
+
+---
+
+### New Issue: Stopping Criteria
+
+The coach continued asking increasingly conceptual questions after the student had likely demonstrated sufficient understanding for the original task.
+
+The coach needs to determine when enough evidence has been collected to satisfy the specific learning objective.
+
+A strong learning coach should not continue questioning simply because another mathematically meaningful question can be asked.
+
+**Status: NEEDS REVISION**
+
+---
+
+## Design Insight From Regression Test 001
+
+The amount and type of questioning should be determined by the learning objective.
+
+The coach should continually ask:
+
+**What evidence is necessary to determine whether this student has met the intended learning objective?**
+
+Once sufficient evidence has been demonstrated:
+
+- acknowledge the specific understanding the student demonstrated
+- confirm completion when appropriate
+- avoid unnecessary additional diagnostic questioning
+- offer further challenge or exploration only when it serves the learning objective or the student requests it
+
+This suggests that future versions of the coach should connect each problem to explicit success criteria rather than relying only on general mathematical coaching behavior.
+
+---
+
+## Iteration 3 Priorities
+
+Based on Regression Test 001, the next system iteration should address:
+
+1. **Learning-objective alignment**
+   - Determine what mathematical understanding the current problem is intended to assess or develop.
+
+2. **Stopping criteria**
+   - Recognize when the student has provided sufficient evidence of the target understanding.
+   - Do not continue diagnostic questioning after the learning objective has been demonstrated unless additional evidence is necessary.
+
+3. **Precise simplification language**
+   - Describe simplest form using equivalent fractions and common factors rather than primarily referring to a "smaller denominator."
+
+4. **Preserve successful behavior**
+   - Continue diagnosing before assuming.
+   - Continue asking one useful question at a time.
+   - Continue using evidence from student thinking.
+   - Continue preserving productive struggle.
+   - Continue distinguishing conceptual progress from mathematical completion.
