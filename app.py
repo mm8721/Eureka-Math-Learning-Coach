@@ -1,6 +1,7 @@
 import os
 import streamlit as st
-from huggingface_hub import InferenceClient
+from google import genai
+from google.genai import types
 
 # ---------------------------------------------------------
 # PAGE SETUP
@@ -314,6 +315,7 @@ student_input = st.chat_input(
 
 if student_input:
 
+    # Save and display the student's message
     st.session_state.messages.append(
         {
             "role": "user",
@@ -326,60 +328,69 @@ if student_input:
 
     try:
 
-        client = InferenceClient(
-            token=st.secrets["HF_TOKEN"]
+        # Connect securely to Gemini using the API key
+        # stored in Streamlit Secrets.
+        client = genai.Client(
+            api_key=st.secrets["GEMINI_API_KEY"]
         )
 
-        conversation = [
-            {
-                "role": "system",
-                "content": SYSTEM_PROMPT
-            }
-        ]
+        # Build conversation history so the coach can remember
+        # what the student has already said.
+        conversation_history = ""
 
         for message in st.session_state.messages:
 
-            conversation.append(
-                {
-                    "role": message["role"],
-                    "content": message["content"]
-                }
+            if message["role"] == "user":
+                speaker = "Student"
+            else:
+                speaker = "Learning Coach"
+
+            conversation_history += (
+                f"{speaker}: {message['content']}\n\n"
             )
 
-        conversation.append(
-            {
-                "role": "user",
-                "content":
-                f"""
+        # Add the student's selected help level.
+        user_prompt = f"""
 The student selected this support level:
 
 {support_level}
 
-Respond according to that level of support.
+Here is the conversation so far:
+
+{conversation_history}
+
+Respond to the student's most recent message.
 
 Remember:
-First understand the student's thinking.
-Do not simply provide the answer.
+- First understand the student's thinking.
+- Respect the selected support level.
+- Do not simply provide the answer.
+- Ask one useful question at a time when diagnosing thinking.
 """
-            }
+
+        # Send the conversation to Gemini.
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=user_prompt,
+            config=types.GenerateContentConfig(
+                system_instruction=SYSTEM_PROMPT,
+                temperature=0.2,
+                max_output_tokens=500
+            )
         )
 
-        response = client.chat_completion(
-            messages=conversation,
-            max_tokens=500,
-            temperature=0.2
-        )
-
-        ai_response = response.choices[0].message.content
+        ai_response = response.text
 
     except Exception as error:
 
+        # During development, show the technical error so we can
+        # troubleshoot the connection.
         ai_response = (
-            "The AI connection is not configured yet. "
-            "The learning-coach interface is working, but we still need "
-            "to connect the language model."
+            "I couldn't connect to the AI model.\n\n"
+            f"Technical error: {error}"
         )
 
+    # Save and display the coach's response.
     st.session_state.messages.append(
         {
             "role": "assistant",
