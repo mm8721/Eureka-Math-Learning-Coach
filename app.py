@@ -480,7 +480,7 @@ MISSING: [specific required evidence that remains unresolved, or NONE if MET]
             contents=objective_evaluation_prompt,
             config=types.GenerateContentConfig(
                 temperature=0.1,
-                max_output_tokens=300,
+                max_output_tokens=600,
                 thinking_config=types.ThinkingConfig(
                     thinking_level="low"
                 )
