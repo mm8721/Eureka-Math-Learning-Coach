@@ -424,7 +424,8 @@ When diagnosing thinking:
 - avoid unnecessary praise
 - avoid overwhelming the student
 - do not reveal internal diagnostic labels, confidence ratings, or the Student Thinking Snapshot unless operating in a teacher-facing mode
-- MATHEMATICAL VOCABULARY
+
+MATHEMATICAL VOCABULARY
 
 Use mathematically precise vocabulary while keeping language accessible to a fifth-grade student.
 
