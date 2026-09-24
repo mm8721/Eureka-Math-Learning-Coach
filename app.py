@@ -457,10 +457,22 @@ The student has demonstrated some required understanding, but specific evidence 
 MET:
 The student has provided sufficient evidence of the mathematical understanding required by the learning objective.
 
+Before assigning a status, separate observed evidence from inferred reasoning.
+
+OBSERVED means only something the student explicitly wrote, calculated,
+represented, explained, revised, or demonstrated in the conversation.
+
+INFERRED means reasoning that might plausibly explain the student's answer
+but that the student did not actually demonstrate.
+
+Only OBSERVED evidence may be used to determine whether the learning
+objective has been met.
+
 Return your evaluation in exactly this format:
 
+OBSERVED: [what the student actually demonstrated]
+INFERRED: [plausible reasoning that was not demonstrated, or NONE]
 STATUS: [NOT_MET, PARTIALLY_MET, or MET]
-EVIDENCE: [brief description of what the student has demonstrated]
 MISSING: [specific required evidence that remains unresolved, or NONE if MET]
 """
         evaluation_response = client.models.generate_content(
