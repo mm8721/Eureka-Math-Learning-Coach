@@ -1255,3 +1255,329 @@ The coach should:
 The explicit instruction to preserve valid student strategies appears to have generalized successfully to this test.
 
 The remaining issues are primarily about question design and mathematical language rather than the coach's willingness to follow student reasoning.
+# Iteration 6 Regression Testing
+
+## Purpose
+
+Iteration 6 focused on improving question design, reasoning with mathematical units, mathematical vocabulary, and precision while preserving the existing diagnostic and student-strategy framework.
+
+Regression testing examined whether these changes generalized across fraction addition, decimal addition, multi-digit subtraction, and a correct-response scenario.
+
+---
+
+## Regression Test 001 — Fraction Addition
+
+### Problem
+
+3/6 + 1/6 = 4/12
+
+### Support Level
+
+Keep trying
+
+### Results
+
+**PASS — Diagnostic questioning**
+
+The coach identified the student's numerator reasoning and asked how the student determined the denominator rather than immediately correcting the answer.
+
+**PASS — Concept before procedure**
+
+After the student explained that they multiplied 6 × 2 because there were two fractions, the coach investigated the meaning of the denominator rather than teaching a rule such as "keep the denominator."
+
+**PASS — Fractional-unit reasoning**
+
+The coach guided the student through the progression:
+
+- a whole divided into 6 equal parts
+- one part is one sixth
+- 3 sixths + 1 sixth = 4 sixths
+- 4 sixths = 4/6
+
+This was a strong improvement over reasoning primarily with informal "pieces."
+
+**PASS — Purposeful questioning during concept development**
+
+Questions generally gathered new evidence and advanced the student toward the learning objective.
+
+For example:
+
+> "If you have 3 of those sixths and you add 1 more sixth, how many sixths do you have in total?"
+
+and:
+
+> "How would you write '4 sixths' as a fraction?"
+
+Both questions required meaningful student reasoning without supplying the answer.
+
+**NEEDS REFINEMENT — Vocabulary scaffolding**
+
+The coach initially used mathematical terms such as "numerator" and "denominator" without the parenthetical scaffolds intended in Iteration 6.
+
+Preferred first-use language:
+
+- numerator (top number)
+- denominator (bottom number)
+- fractional units (equal-sized pieces)
+
+Formal vocabulary should remain primary, with brief scaffolding when appropriate.
+
+**NEEDS REVISION — Failure to recognize resolved understanding**
+
+After the student correctly established:
+
+3 sixths + 1 sixth = 4 sixths = 4/6
+
+the coach returned to the student's original answer:
+
+> "How does that compare to your very first answer of 4/12?"
+
+It then asked:
+
+> "Why do you think the denominator stayed 6 instead of changing to 12?"
+
+These questions were unnecessary because the student had already demonstrated the relevant fractional-unit understanding.
+
+At that point, the remaining unresolved requirement was simplest form.
+
+A stronger next question would have been:
+
+> "Is 4/6 in simplest form?"
+
+### Key Finding
+
+Iteration 6 substantially improved the quality of conceptual questioning but did not reliably improve the coach's ability to recognize when sufficient evidence had resolved the original misconception.
+
+Once understanding is demonstrated, the coach should move to the next unresolved requirement rather than asking the student to demonstrate the same understanding again.
+
+---
+
+## Regression Test 002 — Decimal Addition
+
+### Problem
+
+3.6 + 0.45 = 3.105
+
+### Support Level
+
+Keep trying
+
+### Results
+
+**PASS — Diagnosed before correcting**
+
+The coach began with:
+
+> "How did you set up your addition problem for 3.6 + 0.45?"
+
+This allowed the student to reveal their reasoning before the coach diagnosed the error.
+
+**STRONG PASS — Efficient place-value diagnosis**
+
+After the student explained that they added 6 + 45, the coach asked:
+
+> "When you look at 3.6 and 0.45, what place value does the 6 represent, and what place value does the 4 represent?"
+
+This efficiently gathered evidence about both relevant digits in one purposeful question.
+
+**PASS — Place value before procedure**
+
+The coach connected the written setup to corresponding place values rather than telling the student simply to "line up the decimal points."
+
+**REFINEMENT — Make the relationship between like units explicit**
+
+Once the student identified both digits as tenths, the coach could more explicitly connect that they represent the same place-value unit and therefore can be combined.
+
+**PASS — Investigated the hundredths place**
+
+After the student correctly aligned the tenths, the coach asked the student to examine the hundredths place rather than immediately supplying a zero.
+
+**NEEDS REFINEMENT — Connect notation to quantity**
+
+The coach described adding a zero as filling an "empty space."
+
+A stronger conceptual framing would be:
+
+> "What digit can we write to represent that there are no hundredths in 3.6?"
+
+The zero should be presented as representing zero hundredths, not merely as something inserted to make the written algorithm easier.
+
+**PASS — Unit-based reasoning**
+
+The coach later stated:
+
+> "Zero hundredths plus 5 hundredths is 5 hundredths."
+
+This correctly framed the operation in terms of place-value units.
+
+**REFINEMENT — Prefer units over column language**
+
+Rather than asking students to "add the numbers in the tenths column," prefer language such as:
+
+> "What do you get when you add the tenths?"
+
+This keeps the mathematical units central rather than making the written algorithm the primary concept.
+
+### Test Limitation
+
+The app refreshed before the test could be completed.
+
+The following behaviors were therefore not tested:
+
+- how the coach would respond to 10 tenths
+- whether it would use precise regrouping language
+- whether it would recognize when sufficient evidence had been gathered and stop questioning
+
+### Key Finding
+
+Iteration 6 showed substantial improvement in place-value reasoning. Remaining refinements primarily involve making the meaning of notation explicit and consistently reasoning in terms of place-value units rather than procedural column language.
+
+---
+
+## Regression Test 003 — Multi-Digit Subtraction
+
+### Problem
+
+402 − 187 = 385
+
+### Support Level
+
+Keep trying
+
+### Results
+
+**PASS — Diagnosed before correcting**
+
+The coach first asked the student to explain how they arrived at 385.
+
+**PASS — Focused on the relevant place-value issue**
+
+After the student explained their subtraction process, the coach focused specifically on the ones place.
+
+**NEEDS REFINEMENT — Linguistic accessibility**
+
+The coach asked:
+
+> "Can you take 7 away from 2?"
+
+Although mathematically understandable, this sentence structure may be unnecessarily difficult for some students, including multilingual learners.
+
+A clearer version would be:
+
+> "You have 2 ones, and you need to subtract 7 ones. Do you have enough ones to do that?"
+
+Mathematical precision and linguistically accessible sentence structure can coexist.
+
+**NEEDS REVISION — "Get more ones" language**
+
+After the student recognized that there were not enough ones, the coach asked what the student could do to "get more ones."
+
+This does not accurately communicate the mathematical relationship because the total quantity is not increasing.
+
+Preferred framing:
+
+> "How could you regroup 402 so that you are able to subtract 7 ones?"
+
+**STRONG PASS — Preserved a valid alternative strategy**
+
+The student proposed:
+
+> "I could think of 402 as 40 tens and 2 ones."
+
+The coach accepted that representation and continued reasoning within it rather than forcing a prescribed hundreds-to-tens decomposition.
+
+This provides additional evidence that the "Preserve Valid Student Strategies" principle is working reliably.
+
+**NEEDS REFINEMENT — Regrouping vocabulary**
+
+The coach later described taking a ten and "breaking it apart into ones."
+
+Preferred wording:
+
+> "If you regroup one of those tens as ones, how many tens and ones would you have?"
+
+When equivalent place-value representations are involved, "regroup" should be the primary mathematical term.
+
+### Key Finding
+
+The student-strategy framework appears strong and should be preserved. Remaining issues involve precise regrouping terminology and linguistically clear mathematical language.
+
+---
+
+## Correct-Response Test
+
+### Problem
+
+3/6 + 2/6 = 5/6
+
+### Support Level
+
+Keep trying
+
+### Result
+
+**PASS — Appropriate response to a correct answer**
+
+The coach asked:
+
+> "How did you figure out that 3/6 + 2/6 = 5/6?"
+
+This was an appropriate diagnostic question.
+
+A correct answer is evidence, but it does not necessarily provide sufficient evidence of conceptual understanding. Asking the student to explain their reasoning allows the coach to distinguish correct reasoning from guessing or unsupported computation.
+
+The coach did not unnecessarily correct or reteach the mathematics simply because a problem had been submitted.
+
+---
+
+# Iteration 6 Overall Findings
+
+Iteration 6 improved several important behaviors:
+
+- diagnostic questioning before correction
+- concept-before-procedure reasoning
+- reasoning with fractional and place-value units
+- efficient questioning during concept development
+- preservation of mathematically valid student strategies
+- responsiveness to student reasoning
+
+The strongest remaining issues are:
+
+1. **Evidence tracking and stopping**
+
+   The coach does not yet reliably recognize when a misconception has been sufficiently resolved. It sometimes asks students to demonstrate the same understanding again rather than moving to the next unresolved requirement.
+
+2. **Mathematical vocabulary**
+
+   Formal mathematical terminology should be used consistently and scaffolded when needed.
+
+3. **Regrouping language**
+
+   Equivalent place-value representations should be described using "regroup" rather than language such as "get more," "borrow," "trade," or "break apart" when those terms obscure the underlying equivalence.
+
+4. **Meaning before notation or procedure**
+
+   Mathematical notation and procedures should be connected to the quantities they represent. For example, a zero in 3.60 represents zero hundredths rather than simply filling an empty space.
+
+5. **Linguistic accessibility**
+
+   Use clear, direct sentence structures while maintaining precise mathematical vocabulary. Accessibility should not require sacrificing mathematical precision.
+
+6. **Like-unit reasoning**
+
+   When appropriate, explicitly connect that quantities can be combined because they represent the same mathematical unit, such as sixths with sixths or tenths with tenths.
+
+## Direction for Iteration 7
+
+Iteration 7 should refine the existing framework rather than redesign it.
+
+The primary goal should be to make existing principles more operational and reliable, especially:
+
+- tracking resolved versus unresolved evidence
+- stopping once sufficient evidence has been gathered
+- consistently using unit-based mathematical language
+- using precise regrouping terminology
+- connecting notation to mathematical meaning
+- maintaining linguistically accessible sentence structures
+
+The "Preserve Valid Student Strategies" framework should remain substantially unchanged because regression testing indicates that it is working well.
