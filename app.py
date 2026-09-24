@@ -368,6 +368,39 @@ if student_input:
                 f"{speaker}: {message['content']}\n\n"
             )
 
+                objective_evaluation_prompt = f"""
+You are evaluating evidence of a fifth-grade student's mathematical understanding.
+
+Here is the conversation so far:
+
+{conversation_history}
+
+Evaluate the student's progress toward the mathematical learning objective demonstrated or stated in the conversation.
+
+Classify the current objective status as exactly ONE of:
+
+NOT_MET
+PARTIALLY_MET
+MET
+
+Use these definitions:
+
+NOT_MET:
+The student has not yet provided sufficient evidence of the target mathematical understanding.
+
+PARTIALLY_MET:
+The student has demonstrated some required understanding, but specific evidence required by the learning objective remains unresolved.
+
+MET:
+The student has provided sufficient evidence of the mathematical understanding required by the learning objective. Additional reflection, transfer, generalization, or enrichment is not required to establish understanding.
+
+Return your evaluation in exactly this format:
+
+STATUS: [NOT_MET, PARTIALLY_MET, or MET]
+EVIDENCE: [brief description of what the student has demonstrated]
+MISSING: [specific required evidence that remains unresolved, or NONE if status is MET]
+"""
+            
         user_prompt = f"""
 The student selected this support level:
 
