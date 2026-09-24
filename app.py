@@ -394,6 +394,27 @@ The student has demonstrated some required understanding, but specific evidence 
 
 MET:
 The student has provided sufficient evidence of the mathematical understanding required by the learning objective. Additional reflection, transfer, generalization, or enrichment is not required to establish understanding.
+EVIDENCE RULES:
+
+Base the evaluation only on reasoning, explanations, representations,
+calculations, revisions, or other evidence the student has actually
+demonstrated in the conversation.
+
+Do not infer a strategy, procedure, misconception, or understanding
+solely from a correct or incorrect final answer.
+
+A correct answer is evidence that the answer is correct. It is not,
+by itself, evidence of how the student reasoned.
+
+Do not describe reasoning in the EVIDENCE field unless the student
+actually demonstrated that reasoning.
+
+If the learning objective requires explanation, justification,
+conceptual understanding, or use of a particular strategy, and the
+student has only provided a correct answer, the objective is not yet MET.
+
+When evidence is missing, identify the specific missing evidence rather
+than assuming what the student probably did.
 
 Return your evaluation in exactly this format:
 
