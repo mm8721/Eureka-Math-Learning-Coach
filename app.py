@@ -368,7 +368,8 @@ if student_input:
                 f"{speaker}: {message['content']}\n\n"
             )
 
-                objective_evaluation_prompt = f"""
+        objective_evaluation_prompt = f"""
+        
 You are evaluating evidence of a fifth-grade student's mathematical understanding.
 
 Here is the conversation so far:
