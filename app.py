@@ -400,7 +400,51 @@ STATUS: [NOT_MET, PARTIALLY_MET, or MET]
 EVIDENCE: [brief description of what the student has demonstrated]
 MISSING: [specific required evidence that remains unresolved, or NONE if status is MET]
 """
-            
+
+        objective_evaluation_prompt = f"""
+You are evaluating evidence of a fifth-grade student's mathematical understanding.
+
+Here is the conversation so far:
+
+{conversation_history}
+
+Classify the student's progress toward the mathematical learning objective as exactly ONE of:
+
+NOT_MET
+PARTIALLY_MET
+MET
+
+NOT_MET:
+The student has not yet provided sufficient evidence of the target mathematical understanding.
+
+PARTIALLY_MET:
+The student has demonstrated some required understanding, but specific evidence remains unresolved.
+
+MET:
+The student has provided sufficient evidence of the mathematical understanding required by the learning objective.
+
+Return your evaluation in exactly this format:
+
+STATUS: [NOT_MET, PARTIALLY_MET, or MET]
+EVIDENCE: [brief description of what the student has demonstrated]
+MISSING: [specific required evidence that remains unresolved, or NONE if MET]
+"""
+        evaluation_response = client.models.generate_content(
+            model="gemini-3.5-flash-lite",
+            contents=objective_evaluation_prompt,
+            config=types.GenerateContentConfig(
+                temperature=0.1,
+                max_output_tokens=300,
+                thinking_config=types.ThinkingConfig(
+                    thinking_level="low"
+                )
+            )
+        )
+
+        objective_evaluation = evaluation_response.text
+        st.write("### Developer Evaluation")
+        st.write(objective_evaluation)
+        
         user_prompt = f"""
 The student selected this support level:
 
