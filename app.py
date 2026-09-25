@@ -476,9 +476,16 @@ Here is the conversation so far:
 
 {conversation_history}
 
+Here is the objective evaluation for the conversation:
+
+{objective_evaluation}
+
 Respond to the student's most recent message.
 
 Follow these requirements:
+- Use the objective evaluation to guide the coaching decision.
+- If STATUS is MET, do not ask another question. Briefly acknowledge the demonstrated understanding and conclude.
+- If STATUS is PARTIALLY_MET, focus only on the specific evidence identified as MISSING.
 - First understand the student's thinking.
 - Respect the selected support level.
 - Do not simply provide the answer.
