@@ -1,5 +1,6 @@
 import streamlit as st
 from google import genai
+from curriculum import MODULE_4
 from google.genai import types
 
 
@@ -282,6 +283,12 @@ Do not withhold direct instruction when evidence demonstrates that the
 student needs explicit teaching.
 """
 
+# =========================================================
+# CURRICULUM CONTEXT
+# =========================================================
+
+CURRENT_LESSON = 2
+lesson_context = MODULE_4[CURRENT_LESSON]
 
 # =========================================================
 # CONVERSATION MEMORY
@@ -372,11 +379,20 @@ if student_input:
         
 You are evaluating evidence of a fifth-grade student's mathematical understanding.
 
+The student is working within this curriculum context:
+
+Topic: {lesson_context["topic"]}
+Standard: {lesson_context["standard"]}
+Learning objective: {lesson_context["objective"]}
+
+Required evidence for this learning objective:
+{chr(10).join("- " + evidence for evidence in lesson_context["required_evidence"])}
+
 Here is the conversation so far:
 
 {conversation_history}
 
-Evaluate the student's progress toward the mathematical learning objective demonstrated or stated in the conversation.
+Evaluate the student's progress toward the learning objective above using the required evidence above.
 
 Classify the current objective status as exactly ONE of:
 
