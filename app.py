@@ -435,46 +435,6 @@ STATUS: [NOT_MET, PARTIALLY_MET, or MET]
 MISSING: [specific required evidence that remains unresolved, or NONE if MET]
 """
 
-        objective_evaluation_prompt = f"""
-You are evaluating evidence of a fifth-grade student's mathematical understanding.
-
-Here is the conversation so far:
-
-{conversation_history}
-
-Classify the student's progress toward the mathematical learning objective as exactly ONE of:
-
-NOT_MET
-PARTIALLY_MET
-MET
-
-NOT_MET:
-The student has not yet provided sufficient evidence of the target mathematical understanding.
-
-PARTIALLY_MET:
-The student has demonstrated some required understanding, but specific evidence remains unresolved.
-
-MET:
-The student has provided sufficient evidence of the mathematical understanding required by the learning objective.
-
-Before assigning a status, separate observed evidence from inferred reasoning.
-
-OBSERVED means only something the student explicitly wrote, calculated,
-represented, explained, revised, or demonstrated in the conversation.
-
-INFERRED means reasoning that might plausibly explain the student's answer
-but that the student did not actually demonstrate.
-
-Only OBSERVED evidence may be used to determine whether the learning
-objective has been met.
-
-Return your evaluation in exactly this format:
-
-OBSERVED: [what the student actually demonstrated]
-INFERRED: [plausible reasoning that was not demonstrated, or NONE]
-STATUS: [NOT_MET, PARTIALLY_MET, or MET]
-MISSING: [specific required evidence that remains unresolved, or NONE if MET]
-"""
         evaluation_response = client.models.generate_content(
             model="gemini-3.5-flash-lite",
             contents=objective_evaluation_prompt,
