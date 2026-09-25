@@ -1581,3 +1581,100 @@ The primary goal should be to make existing principles more operational and reli
 - maintaining linguistically accessible sentence structures
 
 The "Preserve Valid Student Strategies" framework should remain substantially unchanged because regression testing indicates that it is working well.
+## Iteration 7: Curriculum-Aware Objective Evaluation and Stopping
+
+### Purpose
+
+Test whether the learning coach can evaluate student understanding against an explicit curriculum objective and required evidence rather than inferring the objective from the conversation alone.
+
+### Architecture Change
+
+Added a separate curriculum metadata layer for Eureka Math Grade 5 Module 4.
+
+For the initial test, Lesson 2 includes:
+
+- Topic: Fractions as Division
+- Standard: 5.NF.3
+- Learning objective: Interpret a fraction as division.
+- Required evidence describing what the student must demonstrate for the objective to be considered met.
+
+The objective evaluator now receives the lesson objective and required evidence before evaluating the student conversation.
+
+The evaluator separates:
+
+- **OBSERVED:** Evidence the student actually demonstrated.
+- **INFERRED:** Plausible reasoning not demonstrated by the student.
+- **STATUS:** NOT_MET, PARTIALLY_MET, or MET.
+- **MISSING:** Specific required evidence that remains unresolved.
+
+The evaluator result is then passed to the coaching model so that objective status can influence the next instructional decision.
+
+### Test 1: Correct Equation Without Sufficient Reasoning
+
+**Student:** `3 ÷ 4 = 3/4`
+
+**Result:** PARTIALLY_MET
+
+The evaluator recognized the correct equation as observed evidence but did not assume the student understood the meaning of the numerator and denominator in an equal-sharing context.
+
+The coach asked the student to explain how they determined that `3 ÷ 4 = 3/4`.
+
+**Finding:** A correct answer alone did not cause the evaluator to infer conceptual understanding.
+
+### Test 2: Sufficient Conceptual Evidence
+
+The student explained that 3 pizzas were being shared equally among 4 people, that 3 represented the quantity being shared, and that 4 represented the number of people sharing.
+
+**Result:** MET
+
+The evaluator identified sufficient observed evidence and reported `MISSING: NONE`.
+
+Before the evaluator status was connected to the coaching decision, the coach continued by asking the student to draw another representation.
+
+After passing the objective evaluation to the coaching model, the coach acknowledged the demonstrated understanding and stopped without requiring additional reflection, representation, transfer, or enrichment.
+
+**Finding:** Explicit objective status improved stopping behavior. Evaluating understanding and making the next coaching decision need to be connected rather than operating independently.
+
+### Test 3: Partial Conceptual Evidence
+
+**Student:** `3/4 means 3 divided by 4.`
+
+**Result:** PARTIALLY_MET
+
+The evaluator credited the demonstrated connection between a fraction and division while identifying the remaining evidence about the meaning of the numerator and denominator.
+
+The coach targeted that specific missing evidence rather than asking a generic follow-up question.
+
+**Finding:** Required-evidence metadata allowed the coach to distinguish partial understanding from complete understanding.
+
+### Test 4: Ambiguous Student Language
+
+**Student:** `3/4 means you have 3 pieces and you divide them into 4 pieces.`
+
+**Result:** PARTIALLY_MET
+
+The evaluator treated possible interpretations of "pieces" as inferred rather than demonstrated. The coach asked what the 3 pieces represented before deciding that the student held a specific misconception.
+
+The student then clarified that the pieces represented 3 whole pizzas being shared equally among 4 people.
+
+**Updated Result:** MET
+
+The evaluator revised its interpretation based on the new evidence rather than remaining anchored to the earlier ambiguity. The coach then concluded without another question.
+
+**Finding:** The evaluator can update its interpretation as student evidence develops across the conversation.
+
+### Remaining Issues
+
+- Fraction notation is sometimes rendered incorrectly in the interface (for example, `3/4` may display as `34`).
+- Continue testing whether inferred reasoning remains appropriately separated from observed evidence across different mathematical situations.
+- Review required-evidence definitions against the curriculum before expanding metadata across Module 4.
+- Test NOT_MET behavior and additional misconception cases.
+- Test whether stopping behavior remains reliable across objectives other than fractions as division.
+
+### Iteration 7 Conclusion
+
+The curriculum-aware evaluator successfully distinguished observed evidence from inferred reasoning, identified specific missing evidence, and classified partial versus sufficient understanding in the initial Lesson 2 tests.
+
+Connecting the evaluator output to the coaching decision resolved the previously observed behavior in which the coach continued questioning after sufficient evidence had already been demonstrated.
+
+The next development step is to validate and expand the curriculum metadata while continuing regression testing across different types of student thinking.
