@@ -12,7 +12,7 @@ MODULE_4 = {
         "objective": "Interpret a fraction as division.",
         "required_evidence": [
             "The student demonstrates that a fraction a/b represents a divided by b.",
-            "The student connects the numerator to the quantity being divided and the denominator to the number of equal shares."
+            "The student demonstrates the relationship between the numerator, denominator, and division in a mathematically valid way, such as through equal sharing, a representation, or an explanation."
         ]
     }
 }
