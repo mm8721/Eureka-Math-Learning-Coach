@@ -287,7 +287,7 @@ student needs explicit teaching.
 # CURRICULUM CONTEXT
 # =========================================================
 
-CURRENT_LESSON = 2
+CURRENT_LESSON = 3
 lesson_context = MODULE_4[CURRENT_LESSON]
 
 # =========================================================
