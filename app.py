@@ -464,8 +464,10 @@ MISSING: [specific required evidence that remains unresolved, or NONE if MET]
         )
 
         objective_evaluation = evaluation_response.text
-        st.write("### Developer Evaluation")
-        st.write(objective_evaluation)
+        # Developer evaluation is used internally to guide coaching decisions.
+        # Hidden from the student-facing interface.
+        # st.write("### Developer Evaluation")
+        # st.write(objective_evaluation)
         
         user_prompt = f"""
 The student selected this support level:
